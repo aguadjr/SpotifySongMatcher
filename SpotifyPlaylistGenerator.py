@@ -37,11 +37,14 @@ input_song = input("What song would you like to create a playlist based off of? 
 song_name = input_song.split("-")[0]
 artist_name = input_song.split("-")[1]
 
+artist_name = artist_name.title()
+
 print(song_name)
 print(artist_name)
 
-musicstax_url = f"https://musicstax.com/search?q={song_name}"
+# aerials-system of a down
 
+musicstax_url = f"https://musicstax.com/search?q={song_name}+{artist_name}"
 
 
 
@@ -50,19 +53,54 @@ song_scrape = response.text
 
 soup = BeautifulSoup(song_scrape, "html.parser")
 
-# # tag = soup.find_all(["a", "div", ])
-# tag = soup.find(id="link3")
-# # tag['']
+div_tag = soup.find_all('div', class_='song-artist')
+a_tag = div_tag.find_parent('a')
+a_tag = soup.find('a', id='some_id')
+link = a_tag.get('href')
+
+# div_tag = soup.find("div", string="System Of A Down")
+# parent_tag = div_tag.parent
+# href = parent_tag.get("href")
+# print(href)
+
+# a_string = soup.find(string="System Of A Down")
+# a_string.find_parents("a")
+# print(a_string)
+
+# tag = soup.find_all("div", string="song")
 # print(tag)
 
-print(soup.find_all(str.title(artist_name)))
-song_link = soup.find_all()
-soup.select("[class~=song-details search-song-details]") # searches for a class with the name song-details search-song-details
-# now i want to search for text within that class
-# if text is found return that class
+# # Find the tag containing the name of the artist (in this case, a span tag with class "artist-name")
+# artist_tag = soup.find("div", class_=artist_name)
+# print(artist_tag)
 
-# for link in soup.find_all('a[class*="aerials"]'):
+# # Access the parent tag of that tag (in this case, an a tag with class "track-link")
+# parent_tag = artist_tag.parent
+#
+# # Extract the href attribute from that tag (in this case, "/track/6PQ88X9TkUIAUIZJHW2upE")
+# href = parent_tag.get("href")
+#
+# # Print href value
+# print(href)
+
+# tag = soup.select(["a", "div", ])
+# # tag = soup.find(id="link3")
+# print(tag)
+
+# print(soup.find(str.title(artist_name)))
+# song_link = soup.find_all()
+# if soup.select("[class~=song-details search-song-details]"):
+#     return
+# searches for a class with the name song-details search-song-details
+# now i want to search for text within that class
+# if a class has this text, return the parent class
+# then take the link from the parent class and extract the last part of the string
+
+# for link in soup.find_all('a'):
 #     print(link.get('href'))
+
+
+
 
 
 # SONG_YEAR = input("What year would you like to travel back to? Enter YYYY-MM-DD format: ")
