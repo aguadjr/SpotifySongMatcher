@@ -12,6 +12,14 @@ sp = spotipy.Spotify(
     )
 )
 
+# sp_user = sp.current_user()
+# user_name = sp_user['uri'].split(":")[2]
+
+playlist_name = "Test"
+sp.user_playlist_create(user=cred.user_name, name=playlist_name)
+
+
+
 # SONG_YEAR = input("What year would you like to travel back to? Enter YYYY-MM-DD format: ")
 # BILL_BOARD_URL = f"https://www.billboard.com/charts/hot-100/{SONG_YEAR}/"
 # SONG_YEAR_YEAR = SONG_YEAR.split("-")[0]
