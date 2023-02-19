@@ -34,8 +34,12 @@ response2 = requests.get(musicstax_url2)
 song_scrape2 = response2.text
 soup2 = BeautifulSoup(song_scrape2, "html.parser")
 
+# initialize list of songs
+song_list = []
+
 # find all links under the 'a' tag with the class artist-seed-track-right
 for link in soup2.find_all('a', class_='artist-seed-track-right'):
     similar_track = link.get('href')
     similar_track_name = similar_track.split("/")[2]
     print(similar_track_name)
+    song_list.append(similar_track_name)
